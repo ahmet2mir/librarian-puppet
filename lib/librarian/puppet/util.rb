@@ -54,10 +54,10 @@ module Librarian
 
       # Remove user and password from a URI object
       def clean_uri(uri)
-        new_uri = uri.clone
-        new_uri.user = nil
-        new_uri.password = nil
-        new_uri
+        # new_uri = uri.clone
+        # new_uri.user = nil
+        # new_uri.password = nil
+        uri
       end
 
       # normalize module name to use organization-module instead of organization/module

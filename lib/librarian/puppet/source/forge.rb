@@ -67,6 +67,7 @@ module Librarian
           end
 
           @uri = URI::parse(uri)
+
           @cache_path = nil
         end
 

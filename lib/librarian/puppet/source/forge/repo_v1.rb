@@ -1,3 +1,4 @@
+require 'uri'
 require 'json'
 require 'open-uri'
 require 'librarian/puppet/source/forge/repo'
@@ -74,7 +75,9 @@ module Librarian
             debug { "Querying Forge API for module #{name}#{" and version #{version}" unless version.nil?}: #{url}" }
 
             begin
-              data = open(url) {|f| f.read}
+              url_base = "#{url.scheme}://#{url.host}:#{url.port}#{url.path}"
+              url_base += "?#{url.query}" if url.query
+              data = open(url_base, http_basic_authentication: [url.user, url.password]) {|f| f.read}
               JSON.parse(data)
             rescue OpenURI::HTTPError => e
               case e.io.status[0].to_i
